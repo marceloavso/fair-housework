@@ -19,6 +19,7 @@
             <a href="tarefas.html"><span class="text-body-secondary">Tarefas</span></a>
             <a href="quadro-tarefas.html"><span class="text-body-secondary">Quadro de Tarefas</span></a>
             <a href="residencias.html"><span class="text-body-secondary">Residências</span></a>
+            <a href="../controller/logout.php"><span class="text-body-secondary">Logout</span></a>
         </div>
     </div>
     <nav class="navbar navbar-light bg-light rounded-bottom-4">
@@ -45,8 +46,45 @@
             <div
                 class="bg-white border border-2 border-dark-subtle rounded-4 h-100 w-100 d-flex flex-column justify-content-center align-items-center">
                 <div class="container">
+                    <div class=" w-25 collapse" id="adicionarResidencia" data-bs-theme="light">
+                        <div class="bg-light p-4 d-flex flex-column">
+                            <form>
+                              <div>
+                                <label>Nome da Residencia</label>
+                                <input type="text" name="nome_residencia" required
+                                  class="w-100 rounded-4 border border-2 border-dark-subtle">
+                              </div>
+                              <div>
+                                <label>Logradouro</label>
+                                <input type="text" name="logradouro" required class="w-100 rounded-4 border border-2 border-dark-subtle">
+                              </div>
+                              <div>
+                                <label>Número</label>
+                                <input type="number" min="0" name="numero" required class="w-100 rounded-4 border border-2 border-dark-subtle">
+                              </div>
+                              <div class="mb-3">
+                                <label>Bairro</label>
+                                <input type="text" name="bairro" required class="w-100 rounded-4 border border-2 border-dark-subtle">
+                              </div>
+                              <div class="mb-3">
+                                <label>Cidade</label>
+                                <input type="text" name="cidade" required class="w-100 rounded-4 border border-2 border-dark-subtle">
+                              </div>
+                              <div class="mb-3">
+                                <label>Estado</label>
+                                <input type="text" name="estado" required class="w-100 rounded-4 border border-2 border-dark-subtle">
+                              </div>
+                              <div class="mb-3">
+                                <label>Tipo de Residência</label>
+                                <input type="text" name="tipo" required class="w-100 rounded-4 border border-2 border-dark-subtle">
+                              </div>
+                              <button class="btn btn-secondary fundo mt-2 w-50" type="submit" formmethod="post" formaction="../controller/cadastrar-residencia.php">Adicionar</button>
+                            </form>
+                        </div>
+                    </div>
                     <div class="row">
-
+                        <button class="btn btn-secondary fundo mt-2 w-25" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#adicionarResidencia">Nova residência</button>
                     </div>
                     <div class="row">
                         <!-- lista de residências -->

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fair Housework</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body class="container-sm fundo">
+  <div class="row">
+
+    <div class="col-6">
+      <img src="imagens/fh-logo.png">
+    </div>
+
+    <div class="col">
+      <h1 class="text-center text-white">
+        Fair Housework
+      </h1>
+
+
+
+
+      <div
+        class="bg-white border border-2 border-dark-subtle rounded-4 h-50 w-100 d-flex flex-column justify-content-center align-items-center">
+        <form name="login">
+          <div>
+            <input type="email" name="email" placeholder="email" required
+              class="w-100 rounded-4 border border-2 border-dark-subtle">
+          </div>
+          <div>
+            <input type="password" name="senha" placeholder="senha" required
+              class="w-100 rounded-4 border border-2 border-dark-subtle">
+          </div>
+
+
+        <a href="recuperar.html"><span>Esqueci minha senha!</span></a>
+
+        <div class="d-flex w-100">
+          <div class="fundo rounded-4 text-light text-center col">
+            <button class="btn botao w-100" type="submit"
+            formmethod="post" formaction="../controller/login.php">
+              Login
+            </button>
+          </div>
+          </form>
+          <div class="bg-dark w-75 rounded-4 text-light text-center col">
+            <a href="cadastro-usuario.html"><button class="btn botao w-100">
+                Registrar
+              </button></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+  </div>
+
+
+  <!--Não apagar-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
