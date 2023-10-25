@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 11/10/2023 às 08:59
+-- Tempo de geração: 25/10/2023 às 20:03
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -20,6 +20,40 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `fair-housework`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `a_fazer`
+--
+
+CREATE TABLE `a_fazer` (
+  `id_afazer` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_tarefa` int(11) NOT NULL,
+  `id_residencia` int(11) NOT NULL,
+  `dia_semana` int(1) NOT NULL,
+  `descricao` text DEFAULT NULL,
+  `feita` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `a_fazer`
+--
+
+INSERT INTO `a_fazer` (`id_afazer`, `id_usuario`, `id_tarefa`, `id_residencia`, `dia_semana`, `descricao`, `feita`) VALUES
+(1, 7, 5, 8, 1, NULL, 0),
+(2, 10, 6, 8, 6, NULL, 0),
+(3, 10, 5, 8, 2, NULL, 0),
+(4, 7, 5, 8, 3, NULL, 0),
+(5, 10, 5, 8, 4, NULL, 0),
+(6, 7, 5, 8, 5, NULL, 0),
+(7, 10, 5, 8, 6, NULL, 0),
+(8, 7, 5, 8, 7, NULL, 0),
+(9, 7, 6, 8, 4, NULL, 0),
+(10, 10, 6, 8, 1, NULL, 0),
+(11, 7, 12, 11, 3, NULL, 0),
+(12, 7, 12, 11, 7, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -43,7 +77,9 @@ CREATE TABLE `residencia` (
 --
 
 INSERT INTO `residencia` (`id_residencia`, `nome_residencia`, `logradouro`, `numero`, `bairro`, `cidade`, `estado`, `tipo`) VALUES
-(8, 'Casa 1', 'a', 1, 'b', 'c', 'e', 'ap');
+(8, 'Casa 1', 'a', 3, 'b', 'c', 'e', 'ap'),
+(11, 'Casa 2', 'aaa', 333, 'vbbb', 'eeee', 'rr', 'casa'),
+(12, 'Casa 3', 'n', 9, 'a', 'q', 'e', 'Apartamento');
 
 -- --------------------------------------------------------
 
@@ -58,6 +94,15 @@ CREATE TABLE `tarefa` (
   `frequencia` int(11) NOT NULL,
   `dia_semana` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tarefa`
+--
+
+INSERT INTO `tarefa` (`id_tarefa`, `id_residencia`, `nome_tarefa`, `frequencia`, `dia_semana`) VALUES
+(5, 8, 'Cozinhar', 7, NULL),
+(6, 8, 'Varrer', 3, NULL),
+(12, 11, 'Compras', 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -78,7 +123,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `email`, `senha`, `nome_usuario`, `sobrenome_usuario`) VALUES
-(7, 'teste@email.com', '827ccb0eea8a706c4c34a16891f84e7b', 'teste', 'usuario');
+(7, 'teste@email.com', '827ccb0eea8a706c4c34a16891f84e7b', 'teste', 'usuario'),
+(10, 'teste2@email.com', '123456', 'teste2', 'usuario2');
 
 -- --------------------------------------------------------
 
@@ -97,11 +143,23 @@ CREATE TABLE `usuario_residencia` (
 --
 
 INSERT INTO `usuario_residencia` (`id_usuario`, `id_residencia`, `admin`) VALUES
-(7, 8, 1);
+(7, 8, 1),
+(7, 11, 0),
+(7, 12, 1),
+(10, 8, 0);
 
 --
 -- Índices para tabelas despejadas
 --
+
+--
+-- Índices de tabela `a_fazer`
+--
+ALTER TABLE `a_fazer`
+  ADD PRIMARY KEY (`id_afazer`),
+  ADD KEY `fk_afazer_tarefa` (`id_tarefa`),
+  ADD KEY `fk_afazer_usuario` (`id_usuario`),
+  ADD KEY `fk_afazer_residencia` (`id_residencia`);
 
 --
 -- Índices de tabela `residencia`
@@ -114,6 +172,7 @@ ALTER TABLE `residencia`
 --
 ALTER TABLE `tarefa`
   ADD PRIMARY KEY (`id_tarefa`),
+  ADD UNIQUE KEY `nome_tarefa` (`nome_tarefa`),
   ADD KEY `fk_residencia_tarefa` (`id_residencia`);
 
 --
@@ -135,26 +194,40 @@ ALTER TABLE `usuario_residencia`
 --
 
 --
+-- AUTO_INCREMENT de tabela `a_fazer`
+--
+ALTER TABLE `a_fazer`
+  MODIFY `id_afazer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT de tabela `residencia`
 --
 ALTER TABLE `residencia`
-  MODIFY `id_residencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_residencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `tarefa`
 --
 ALTER TABLE `tarefa`
-  MODIFY `id_tarefa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_tarefa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restrições para tabelas despejadas
 --
+
+--
+-- Restrições para tabelas `a_fazer`
+--
+ALTER TABLE `a_fazer`
+  ADD CONSTRAINT `fk_afazer_residencia` FOREIGN KEY (`id_residencia`) REFERENCES `tarefa` (`id_residencia`),
+  ADD CONSTRAINT `fk_afazer_tarefa` FOREIGN KEY (`id_tarefa`) REFERENCES `tarefa` (`id_tarefa`),
+  ADD CONSTRAINT `fk_afazer_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario_residencia` (`id_usuario`);
 
 --
 -- Restrições para tabelas `tarefa`
