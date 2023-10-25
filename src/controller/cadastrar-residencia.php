@@ -8,7 +8,7 @@ if(@$_REQUEST['nome_residencia']){
     $select = $mysql->prepare($sql);
     $select->execute([$_SESSION['login']]);
     $id_usuario = $select->fetchColumn();
-    echo "$id_usuario";
+    
 
     $sql = "INSERT INTO residencia (nome_residencia, logradouro, numero,
       bairro, cidade, estado, tipo) VALUES (?, ?, ?, ?, ?, ?, ?)";
