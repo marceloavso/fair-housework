@@ -1,0 +1,28 @@
+.fundo {
+    background-color: #1B9FA8;
+}
+
+.botao {
+    color: white;
+}
+
+.quadroResidencias {
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.quadro{
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+a{
+    text-decoration: none;
+}

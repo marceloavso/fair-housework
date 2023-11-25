@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fair Housework</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+</head>
+
+<body class="container-sm fundo">
+
+    <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="light">
+        <div class="bg-light p-4 d-flex flex-column">
+            <h5 class="text-body-emphasis h4">Menu</h5>
+            <a href="perfil.html"><span class="text-body-secondary">Perfil</span></a>
+            <a href="tarefas.html"><span class="text-body-secondary">Tarefas</span></a>
+            <a href="quadro-tarefas.html"><span class="text-body-secondary">Quadro de Tarefas</span></a>
+            <a href="residencias.html"><span class="text-body-secondary">Residências</span></a>
+            <a href="../controller/logout.php"><span class="text-body-secondary">Logout</span></a>
+        </div>
+    </div>
+    <nav class="navbar navbar-light bg-light rounded-bottom-4">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+
+    <div class="row">
+
+        <div class="col">
+            <h1 class="text-center text-white">
+                Quadro de Tarefas
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col">
+            <div class="bg-white border border-2 border-dark-subtle rounded-4 h-100 w-100 d-flex flex-column justify-content-center align-items-center">
+                <div class="container">
+                  <div class="d-grid">
+                    <div class="row">
+                      <div class="col m-2 d-inline-block">
+                        <form >
+                          <select id="selRes" class="col form-select form-select-sm"
+                          name="selResidencia" onchange="carregarQuadro()">
+                            <!-- Selecionar Residencia -->
+                          </select>
+                        </form>
+                      </div>
+                      <div class="m-2 col form-check form-switch d-inline-block">
+                          <input class="form-check-input" type="checkbox" role="switch" id="b-minhasTarefas" onchange="carregarQuadro()">
+                          <label class="form-check-label" for="b-minhasTarefas">Minhas Tarefas</label>
+                      </div>
+                      <div class="m-2 col form-check form-switch d-inline-block">
+                          <button class="btn btn-secondary fundo" type="button" id="b-gerarQuadro" onclick="gerarQuadro()">Gerar Quadro</button>
+                      </div>
+                      <div class="m-2 col form-check form-switch d-inline-block">
+                          <button class="btn btn-secondary fundo" type="button" id="shareResBtn" onclick="shareResidencia()">Compartilhar Residencia</button>
+                      </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <!-- Quadro de Dias da Semana -->
+                        <div class="col-md-12">
+                            <div class="d-sm-flex justify-content-around">
+                                <div class="quadro">
+                                    <h5>Domingo</h5>
+                                    <!-- Tarefas de domingo serão adicionadas aqui -->
+                                    <ul id="dom" class="list-group">
+                                    </ul>
+                                </div>
+                                <div class="quadro">
+                                    <h5>Segunda</h5>
+                                    <!-- Tarefas de segunda-feira serão adicionadas aqui -->
+                                    <ul id="seg" class="list-group">
+                                    </ul>
+                                </div>
+                                <div class="quadro">
+                                    <h5>Terça</h5>
+                                    <!-- Tarefas de terça-feira serão adicionadas aqui -->
+                                    <ul id="ter" class="list-group">
+                                    </ul>
+                                </div>
+                                <div class="quadro">
+                                    <h5>Quarta</h5>
+                                    <!-- Tarefas de quarta-feira serão adicionadas aqui -->
+                                    <ul id="qua" class="list-group">
+                                    </ul>
+                                </div>
+                                <div class="quadro">
+                                    <h5>Quinta</h5>
+                                    <!-- Tarefas de quinta-feira serão adicionadas aqui -->
+                                    <ul id="qui" class="list-group">
+                                    </ul>
+                                </div>
+                                <div class="quadro">
+                                    <h5>Sexta</h5>
+                                    <!-- Tarefas de sexta-feira serão adicionadas aqui -->
+                                    <ul id="sex" class="list-group">
+                                    </ul>
+                                </div>
+                                <div class="quadro">
+                                    <h5>Sábado</h5>
+                                    <!-- Tarefas de sábado serão adicionadas aqui -->
+                                    <ul id="sab" class="list-group">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+      </div>
+    </div>
+  <!-- Modal Tarefa -->
+  <div class="modal fade" id="modalTarefas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalTarefas" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalTarefasLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="responsavel" class="col-form-label">Responsável:
+              	<input class="form-control" type="text" placeholder="" disabled>
+              	<button class="btn btn-sm btn-secondary fundo" type="button" id="trocarTarefaBtn">Solicitar troca</button>
+              </label>
+
+            </div>
+            <div class="mb-3">
+              <label for="descricao" class="col-form-label">Descrição:</label>
+              <textarea class="form-control" id="descricao"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          <button id="salvar" type="button" class="btn btn-primary">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<script>
+document.addEventListener("DOMContentLoaded", isLogado, selectResidencia);
+function isLogado(){
+  $.ajax({url: '../controller/is-logado.php', async: false, dataType: 'json', type: 'get',
+    data: {isLogado: 1}, success: redirecionar});
+}
+function redirecionar(isLogado){
+  if(isLogado){
+    return true;
+  }
+  else{
+    window.location.replace("../index.html");
+  }
+}
+  document.addEventListener("DOMContentLoaded", selectResidencia);
+  function selectResidencia(){
+    $.getJSON('../controller/visualizar-quadro.php', {selResidencia: 1}, exibirResidencias);
+  }
+
+  function exibirResidencias(residencias){
+    $('#selRes').empty();
+    for(i in residencias){
+      let option = document.createElement('option');
+      option.value = residencias[i].id_residencia;
+      option.innerHTML = residencias[i].nome_residencia;
+      $('#selRes').append(option);
+    }
+    carregarQuadro();
+  }
+
+  function carregarQuadro(){
+    let minhasTarefas = document.getElementById('b-minhasTarefas').checked;
+    if(minhasTarefas){
+      $.getJSON('../controller/visualizar-quadro.php', {carregarMeuQuadro: $('#selRes').val()}, exibirQuadro);
+    }
+    else{
+      $.getJSON('../controller/visualizar-quadro.php', {carregarQuadroGeral: $('#selRes').val()}, exibirQuadro);
+    }
+  }
+
+  function exibirQuadro(tarefas){
+    $('ul').empty();
+    for( i in tarefas){
+      let li = document.createElement('li');
+      li.classList.add('list-group-item');
+      li.setAttribute("data-bs-toggle", "modal");
+      li.setAttribute( "data-bs-target", "#modalTarefas");
+      li.id_afazer = tarefas[i].id_afazer;
+      switch(tarefas[i].dia_semana){
+        case 1:
+          li.innerHTML = tarefas[i].nome_tarefa;
+          $('#dom').append(li);
+          break;
+        case 2:
+          li.innerHTML = tarefas[i].nome_tarefa;
+          $('#seg').append(li);
+          break;
+        case 3:
+          li.innerHTML = tarefas[i].nome_tarefa;
+          $('#ter').append(li);
+          break;
+        case 4:
+          li.innerHTML = tarefas[i].nome_tarefa;
+          $('#qua').append(li);
+          break;
+        case 5:
+          li.innerHTML = tarefas[i].nome_tarefa;
+          $('#qui').append(li);
+          break;
+        case 6:
+          li.innerHTML = tarefas[i].nome_tarefa;
+          $('#sex').append(li);
+          break;
+        case 7:
+          li.innerHTML = tarefas[i].nome_tarefa;
+          $('#sab').append(li);
+          break;
+      }
+    }
+    $('li').css('cursor', 'pointer');
+  }
+
+  function gerarQuadro(){
+    $.ajax({url: '../controller/visualizar-quadro.php', async: false, dataType: 'json', type: 'get', data: {gerarQuadro: $('#selRes').val()}, success: carregarQuadro});
+  }
+
+  function shareResidencia(){
+    let link =  window.location.href+"/../../controller/visualizar-quadro.php?entrarResidencia=1&nResidencia="+$('#selRes').val();
+    $.ajax({url: '../controller/visualizar-quadro.php', async: false, dataType: 'json', type: 'get',
+     data: {
+       shareResidencia: $('#selRes').val(),
+       link: link},
+       success: exibirLink});
+  }
+  function exibirLink(link){
+    alert('Envie este link para quem você deseja adicionar: \n\n' + link);
+  }
+
+  //Controle da modalTarefas
+  const modalTarefas = document.getElementById('modalTarefas')
+  if (modalTarefas) {
+    modalTarefas.addEventListener('show.bs.modal', event => {
+      // Elemento que ativa a modal
+      var li = event.relatedTarget;
+
+      // Extrai informações
+      var responsavel = {};
+      var tarefa = {};
+      var nome_tarefa = li.innerHTML;
+      var salvar = $('#salvar');
+      var trocarTarefaBtn = $('#trocarTarefaBtn');
+
+
+      // Funções
+      getResponsavel(li.id_afazer);
+      getTarefa(li.id_afazer);
+      $('#modalTarefas').on('click','#salvar',atualizarDescricao);
+      $('#modalTarefas').on('click','#trocarTarefaBtn',{nome_tarefa: li.innerHTML, id_tarefa: tarefa.id_terefa},trocarTarefa);
+
+      function getTarefa(id_afazer){
+        $.ajax({url: '../controller/visualizar-quadro.php', async: false, dataType: 'json', type: 'get', data: {infoTarefa: id_afazer}, success: exibirTarefa});
+      }
+
+      function exibirTarefa(t){
+        tarefa = t;
+      }
+
+      function getResponsavel(id_afazer){
+        $.ajax({url: '../controller/visualizar-quadro.php', async: false, dataType: 'json', type: 'get', data: {responsavelTarefa: id_afazer}, success: exibirResponsavel});
+      }
+
+      function exibirResponsavel(r){
+        responsavel = r;
+      }
+
+      function trocarTarefa(event){
+        $.ajax({url: '../controller/visualizar-quadro.php', async: false, dataType: 'json', type: 'get',
+         data: {
+           trocarTarefa: 1,
+           id_afazer: event.data.id_tarefa,
+           nome_tarefa: event.data.nome_tarefa,
+           nome_resp: responsavel.nome+" "+responsavel.sobrenome,
+           email_resp: responsavel.email,
+           link: window.location.href+"/../../controller/visualizar-quadro.php?aceitarTrocaTarefa=1&tarefa="+tarefa.id_afazer,
+         }, success: exibirMensagemTroca});
+      }
+
+      function exibirMensagemTroca(retorno){
+        /*
+        if(retorno){
+          alert('Solicitação de troca enviada por email. Aguarde retorno do responsável.');
+        }
+        else{
+          alert('Falha no envio de solicitação de troca');
+        }
+        */
+        alert('Envie este link para o responsável atual da tarefa e aguarde seu retorno.\n\n' + retorno);
+      }
+
+      function atualizarDescricao(event){
+        $.ajax({url: '../controller/visualizar-quadro.php', async: false, dataType: 'json', type: 'get', data: {atualizarTarefa: li.id_afazer, descricao: modalTarefas.querySelector('#descricao').value, success: alert('Salvo!')}});
+      }
+      modalTarefas.addEventListener('hidden.bs.modal', event => {
+        $('#modalTarefas').off('click', '#salvar', atualizarDescricao);
+        $('#modalTarefas').off('click','#trocarTarefaBtn',trocarTarefa);
+      })
+
+      // Atualiza conteúdo da modal
+      var modalTitle = modalTarefas.querySelector('#modalTarefasLabel');
+      var modalBodyInput = modalTarefas.querySelector('.modal-body input');
+      var modalBodyTextArea = modalTarefas.querySelector('#descricao');
+      var modalFooterSalvarButton = modalTarefas.querySelector('#salvar');
+
+      modalTitle.textContent = nome_tarefa;
+      if(responsavel.nome_usuario != null){
+        modalBodyInput.value = responsavel.nome_usuario + " " + responsavel.sobrenome_usuario;
+      }
+      else{
+        modalBodyInput.value = "sem responsável";
+      }
+      modalBodyTextArea.value = tarefa.descricao;
+
+    })
+  }
+
+
+</script>
+
+</html>

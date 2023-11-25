@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fair Housework</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+</head>
+
+<body class="container-sm fundo">
+  <div class="row">
+
+    <div class="col">
+      <h1 class="text-center text-white">
+        Fair Housework
+      </h1>
+
+
+
+
+      <div
+        class="bg-white border border-2 border-dark-subtle rounded-4 h-100 w-100 d-flex flex-column justify-content-center align-items-center">
+        <form name="cadastrar">
+          <div>
+            <label>Email</label>
+            <input type="email" name="email" placeholder="nome@email.com" required
+              class="w-100 rounded-4 border border-2 border-dark-subtle">
+          </div>
+          <div>
+            <label>Senha</label>
+            <input type="password" name="senha" required class="w-100 rounded-4 border border-2 border-dark-subtle">
+          </div>
+          <div>
+            <label>Nome</label>
+            <input type="text" name="nome" required class="w-100 rounded-4 border border-2 border-dark-subtle">
+          </div>
+          <div class="mb-3">
+            <label>Sobrenome</label>
+            <input type="text" name="sobrenome" required class="w-100 rounded-4 border border-2 border-dark-subtle">
+          </div>
+
+
+
+
+          <div class="d-flex w-75">
+            <div class="fundo w-75 rounded-4 text-light text-center col">
+              <button class="btn botao" type="submit" formmethod="post" formaction="../controller/cadastrar-usuario.php">
+                Cadastrar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+
+
+
+
+
+  </div>
+</body>
+
+</html>

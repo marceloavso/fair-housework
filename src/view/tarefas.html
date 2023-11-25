@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fair Housework</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+</head>
+
+<body class="container-sm fundo">
+
+    <div class="collapse" id="navbarToggleExternalContent" data-bs-theme="light">
+        <div class="bg-light p-4 d-flex flex-column">
+            <h5 class="text-body-emphasis h4">Menu</h5>
+            <a href="perfil.html"><span class="text-body-secondary">Perfil</span></a>
+            <a href="tarefas.html"><span class="text-body-secondary">Tarefas</span></a>
+            <a href="quadro-tarefas.html"><span class="text-body-secondary">Quadro de Tarefas</span></a>
+            <a href="residencias.html"><span class="text-body-secondary">Residências</span></a>
+            <a href="../controller/logout.php"><span class="text-body-secondary">Logout</span></a>
+        </div>
+    </div>
+    <nav class="navbar navbar-light bg-light rounded-bottom-4">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+
+    <div class="row">
+
+        <div class="col">
+            <h1 class="text-center text-white">
+                Gerenciamento de Tarefas
+            </h1>
+
+            <div class="bg-white border border-2 border-dark-subtle rounded-4 h-100 w-100 d-flex flex-column justify-content-center align-items-center">
+            <div class="container">
+
+
+                  <div class="row w-25 ms-2">
+                    <!-- Botão para adicionar tarefa ao pool sem modal-->
+
+                      <button class="btn btn-secondary fundo mt-2 dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                      aria-expanded="false" data-bs-auto-close+"outside" onclick="selectResidencia()">Nova tarefa</button>
+                      <div class=" w-25" id="adicionarTarefa" data-bs-theme="light">
+                          <div class="bg-light p-4 d-flex flex-column">
+                              <form id="formAddTarefa" class="dropdown-menu p-4">
+                                <div>
+                                  <label>Residencia</label>
+                                    <select id="selRes" name="id_residencia"class="w-100 rounded-4 border border-2 border-dark-subtle">
+                                    </select>
+                                </div>
+                                <div>
+                                  <label>Nome da Tarefa</label>
+                                  <input id="nomeTarefa" type="text" name="nome_tarefa" required
+                                    class="w-100 rounded-4 border border-2 border-dark-subtle">
+                                </div>
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="tipoFrequencia" id="addRbFrequencia">
+                                  <label class="form-check-label" for="flexRadioDefault1">
+                                    Frequencia
+                                    <div class=" mb-3">
+                                      <label for="descricao" class=" d-inline-block col-form-label">
+                                        <select class="form-select form" id="addFrequencia">
+                                        <option value="1">1 dia</option>
+                                        <option value="2">2 dias</option>
+                                        <option value="3">3 dias</option>
+                                        <option value="4">4 dias</option>
+                                        <option value="5">5 dias</option>
+                                        <option value="6">6 dias</option>
+                                        <option value="7">Diária</option>
+                                        </select>
+                                      </label>
+                                    </div>
+                                  </label>
+                                </div>
+                                <div class="form-check">
+                                  <input class="form-check-input" type="radio" name="tipoFrequencia" id="addRbDiaSemana">
+                                  <label class="form-check-label" for="flexRadioDefault2">
+                                    Dia da Semana
+                                    <div class="form-check">
+                                      <input class="form-check-input dias" type="checkbox" value="1">
+                                      <label class="form-check-label" for="inlineCheckbox1">Domingo</label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input dias" type="checkbox" value="2">
+                                      <label class="form-check-label" for="inlineCheckbox2">Segunda</label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input dias" type="checkbox" value="3">
+                                      <label class="form-check-label" for="inlineCheckbox3">Terça</label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input dias" type="checkbox" value="4">
+                                      <label class="form-check-label" for="inlineCheckbox1">Quarta</label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input dias" type="checkbox" value="5">
+                                      <label class="form-check-label" for="inlineCheckbox2">Quinta</label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input dias" type="checkbox" value="6">
+                                      <label class="form-check-label" for="inlineCheckbox3">Sexta</label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input dias" type="checkbox" value="7">
+                                      <label class="form-check-label" for="inlineCheckbox3">Sábado</label>
+                                    </div>
+                                  </label>
+                                </div>
+                                <button class="btn btn-secondary fundo mt-2 w-50" type="button" onclick="adicionarTarefa()">Adicionar</button>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <!-- lista de atividades -->
+                    <div class="col-md-12">
+                        <div class="d-sm-flex justify-content-around">
+                          <div class="col-md-12">
+                              <div id="quadrosTarefas" class="d-sm-flex justify-content-around">
+
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Modal Tarefa -->
+                <div class="modal fade" id="modalTarefas" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalTarefas" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTarefasLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form  id="formAtualizaTarefa">
+                          <div class="mb-3">
+                            <label for="modalNomeTarefa" class="col-form-label">Nome Tarefa:
+                            	<input class="form-control" type="text">
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tipoFrequencia" id="rbFrequencia">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                              Frequencia
+                              <div class=" mb-3">
+                                <label for="descricao" class=" d-inline-block col-form-label">
+                                  <select class="form-select form" id="modalFrequencia">
+                                  <option value="1">1 dia</option>
+                                  <option value="2">2 dias</option>
+                                  <option value="3">3 dias</option>
+                                  <option value="4">4 dias</option>
+                                  <option value="5">5 dias</option>
+                                  <option value="6">6 dias</option>
+                                  <option value="7">Diária</option>
+                                  </select>
+                                </label>
+                              </div>
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input " type="radio" name="tipoFrequencia" id="rbDiaSemana">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                              Dia da Semana
+                              <div class="form-check">
+                                <input class="form-check-input modalDias" type="checkbox" value="1">
+                                <label class="form-check-label" for="inlineCheckbox1">Domingo</label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input modalDias" type="checkbox" value="2">
+                                <label class="form-check-label" for="inlineCheckbox2">Segunda</label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input modalDias" type="checkbox" value="3">
+                                <label class="form-check-label" for="inlineCheckbox3">Terça</label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input modalDias" type="checkbox" value="4">
+                                <label class="form-check-label" for="inlineCheckbox1">Quarta</label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input modalDias" type="checkbox" value="5">
+                                <label class="form-check-label" for="inlineCheckbox2">Quinta</label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input modalDias" type="checkbox" value="6">
+                                <label class="form-check-label" for="inlineCheckbox3">Sexta</label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input modalDias" type="checkbox" value="7">
+                                <label class="form-check-label" for="inlineCheckbox3">Sábado</label>
+                              </div>
+                            </label>
+                          </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer container">
+                        <button id="deletar" type="button" class="btn btn-danger" data-bs-dismiss="modal">Deletar</button>
+                        <div class="col"></div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button id="salvar" type="button" class="btn btn-primary">Salvar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+document.addEventListener("DOMContentLoaded", isLogado);
+function isLogado(){
+  $.ajax({url: '../controller/is-logado.php', async: false, dataType: 'json', type: 'get',
+    data: {isLogado: 1}, success: redirecionar});
+}
+function redirecionar(isLogado){
+  if(isLogado){
+    return true;
+  }
+  else{
+    window.location.replace("../index.html");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", carregarResidencias);
+
+function selectResidencia(){
+  $.getJSON('../controller/visualizar-tarefas.php', {selResidencia: 1}, exibirResidencias);
+}
+
+function exibirResidencias(residencias){
+  $('#selRes').empty();
+  for(i in residencias){
+    let option = document.createElement('option');
+    option.value = residencias[i].id_residencia;
+    option.innerHTML = residencias[i].nome_residencia;
+    $('#selRes').append(option);
+  }
+}
+function carregarResidencias(){
+  $.getJSON('../controller/visualizar-tarefas.php', {selResidencia: 1}, carregarTarefas);
+}
+
+function carregarTarefas(residencias){
+  $('#quadrosTarefas').empty();
+  for(i in residencias){
+    var id_residencia = residencias[i].id_residencia
+    var div = document.createElement('div');
+    div.classList.add('d-inline-block', 'quadro');
+    var h5 = document.createElement('h5');
+    h5.innerHTML = residencias[i].nome_residencia;
+    div.appendChild(h5);
+    var ul = document.createElement('ul');
+    ul.classList.add('list-group');
+    div.appendChild(ul);
+    document.getElementById('quadrosTarefas').appendChild(div);
+    $.ajax({url: '../controller/visualizar-tarefas.php', async: false, dataType: 'json', type: 'get', data: {carregarTarefas: id_residencia},success: exibirTarefas});
+    function exibirTarefas(tarefas){
+      if(tarefas.length > 0){
+        for(i in tarefas){
+          var li = document.createElement('li');
+          li.classList.add('list-group-item');
+          li.setAttribute("data-bs-toggle", "modal");
+          li.setAttribute( "data-bs-target", "#modalTarefas");
+          li.id_tarefa = tarefas[i].id_tarefa;
+          li.innerHTML= tarefas[i].nome_tarefa;
+          ul.appendChild(li);
+        }
+        $('li').css('cursor', 'pointer');
+      }
+      else{
+        div.remove();
+      }
+    }
+  }
+}
+
+function adicionarTarefa(){
+  let form = document.getElementById('formAddTarefa');
+  let selectAdd = form.querySelector('#addRbFrequencia').checked;
+  if(selectAdd){
+    $.ajax({url: '../controller/cadastrar-tarefa.php', async: false, dataType: 'json', type: 'get',
+      data: {
+      cadFreq: 1,
+      id_residencia: form.querySelector('#selRes').value,
+      nome_tarefa: form.querySelector('#nomeTarefa').value,
+      frequencia: form.querySelector('#addFrequencia').value,
+      success: alert('Tarefa adicionada!')}});
+  }
+  else{
+    let dias = $('#formAddTarefa input[type=checkbox]:checked').map(function(_, values) {
+      return $(values).val();
+    }).get();
+
+    $.ajax({url: '../controller/cadastrar-tarefa.php', async: false, dataType: 'json', type: 'get',
+      data: {
+      cadDia: 1,
+      id_residencia: form.querySelector('#selRes').value,
+      nome_tarefa: form.querySelector('#nomeTarefa').value,
+      frequencia: dias.length,
+      dia_semana:  JSON.stringify(dias),
+      success: alert('Tarefa adicionada!')}});
+  }
+  carregarResidencias();
+}
+
+
+//Controle da modalTarefas
+const modalTarefas = document.getElementById('modalTarefas')
+if (modalTarefas) {
+  modalTarefas.addEventListener('show.bs.modal', event => {
+    // Elemento que ativa a modal
+    var li = event.relatedTarget;
+
+    // Extrai informações
+    var tarefa = {};
+    var nome_tarefa = li.innerHTML;
+    var salvar = $('#salvar');
+    var deletar = $('#deletar');
+
+
+
+    // Funções
+    getTarefa(li.id_tarefa);
+    $('#modalTarefas').on('click','#salvar', atualizarTarefa);
+    $('#modalTarefas').on('click','#deletar', deletarTarefa);
+
+    function getTarefa(id_tarefa){
+      $.ajax({url: '../controller/visualizar-tarefas.php', async: false, dataType: 'json', type: 'get', data: {infoTarefa: id_tarefa}, success: exibirTarefa});
+    }
+
+    function exibirTarefa(t){
+      tarefa = t;
+    }
+
+    function atualizarTarefa(event){
+      let form = document.getElementById('formAtualizaTarefa');
+      let selectAdd = modalTarefas.querySelector('#rbFrequencia').checked;
+      if(selectAdd){
+        $.ajax({url: '../controller/visualizar-tarefas.php', async: false, dataType: 'json', type: 'get',
+          data: {
+          atualizarTarefaFreq: 1,
+          id_tarefa: tarefa.id_tarefa,
+          id_residencia: tarefa.id_residencia,
+          nome_tarefa: modalTarefas.querySelector('.modal-body input').value,
+          frequencia: modalTarefas.querySelector('#modalFrequencia').value,
+          success: alert('Tarefa atualizada!')}});
+      }
+      else{
+        let dias = $('#formAtualizaTarefa input[type=checkbox]:checked').map(function(_, values) {
+          return $(values).val();
+        }).get();
+
+        $.ajax({url: '../controller/visualizar-tarefas.php', async: false, dataType: 'json', type: 'get',
+          data: {
+          atualizarTarefaDia: 1,
+          id_tarefa: tarefa.id_tarefa,
+          id_residencia: tarefa.id_residencia,
+          nome_tarefa: modalTarefas.querySelector('.modal-body input').value,
+          frequencia: dias.length,
+          dia_semana:  JSON.stringify(dias),
+          success: alert('Tarefa atualizada!')}});
+      }
+    }
+
+    function deletarTarefa(event){
+      $.ajax({url: '../controller/visualizar-tarefas.php', async: false, dataType: 'json', type: 'get',
+        data: {
+        deletarTarefa: 1,
+        id_tarefa: tarefa.id_tarefa,
+        id_residencia: tarefa.id_residencia,
+        success: alert('Tarefa excluída!')}});
+        carregarResidencias();
+    }
+
+    modalTarefas.addEventListener('hidden.bs.modal', event => {
+      $('#modalTarefas').off('click', '#salvar', atualizarTarefa);
+      $('#modalTarefas').off('click', '#deletar', deletarTarefa);
+    });
+
+    // Atualiza conteúdo da modal
+    var modalDias = JSON.parse(tarefa.dia_semana);
+
+    var modalTitle = modalTarefas.querySelector('#modalTarefasLabel');
+    var modalBodyInput = modalTarefas.querySelector('.modal-body input');
+    var modalBodyDias = modalTarefas.querySelectorAll('.modalDias');
+    var modalFooterSalvarButton = modalTarefas.querySelector('#salvar');
+    var modalFooterdeletarButton = modalTarefas.querySelector('#deletar');
+    var modalBodyFrequencia = modalTarefas.querySelector('#modalFrequencia');
+
+    modalTitle.textContent = nome_tarefa;
+    modalBodyInput.value = tarefa.nome_tarefa;
+    if(modalDias!=null){
+      modalTarefas.querySelector('#rbDiaSemana').checked = true;
+      modalBodyFrequencia.value = modalDias.length;
+      for(i=0; i<modalDias.length; i++){
+        modalBodyDias[modalDias[i]-1].checked = true;
+      }
+    }
+    else{
+      modalTarefas.querySelector('#rbFrequencia').checked = true;
+      modalBodyFrequencia.value = tarefa.frequencia;
+      for(i=0;i<modalBodyDias.length;i++){
+          modalBodyDias[i].checked = false;
+      }
+    }
+
+  });
+}
+
+</script>
+</html>
